@@ -1,0 +1,90 @@
+/**
+ * Copyright (c) 2020
+ *
+ * The TryCatchPop file adds integer added by the 
+ * user to the stack array and it pops it off the stack. It also checks
+ * whether the stack is empty or not and doesn't crash.
+ * 
+ * @author Wajd Mariam <wajd.mariam@mths.ca>
+ * Version 1.0
+ * Created on : 2020/12/13
+ */
+ 
+// Importing the class WajdStack from another file
+const WajdStack2 = require("./WajdStack2");
+
+// Imports prompt
+const prompt = require('prompt-sync')({sigint: true});
+
+// Declaring stack by using the JacobStack class
+let stack = new WajdStack2();
+
+// Declaring variables used:
+let sizeStack = 0;
+let intAdded = 0;
+let counter = 0;
+let counter2 = 0;
+let popNumber = 0;
+
+// Try Catch Statement:
+try {
+  
+  // Input / Process / Output
+  
+  // Getting size of the stack:
+  sizeStack = prompt(`Enter the size of the stack: `);
+    
+  // Checking if entered size is an integer:
+  if (isNaN(sizeStack) == true) {
+    throw "ERROR: Invalid Input";
+  } else {
+    // Checking if entered size is valid:
+    if (sizeStack == 0) {
+      console.log(`You can't have a stack size 0!`);
+    } else {
+      // Entering a do/while loop to add integers into the stack:
+      do {
+        // Getting an integer to add from user:
+        intAdded = prompt(`Enter a number to add to the stack: `);
+        // Checking if entered number is an integer:
+        if (isNaN(intAdded) == true) {
+           throw "ERROR: Invalid Input";
+        } else {
+          // Adding one to counter each time:
+          counter = counter + 1;
+          // pushing the integer inputted to the stack:
+          stack.push(intAdded);
+        }
+      } while (counter != sizeStack);
+    
+      // Asking the user whether or not they want to pop off integers from stack:
+      popNumber = prompt(`How many times do you want to pop integers off stack? `);
+      // Checking if entered pop number is an integer:
+      if (isNaN(popNumber) == true) {
+           throw "ERROR: Invalid Input";
+      } else {
+        // Try Catch Statement for catching if stack is empty:
+        try {
+          // Entering a do/while loop to pop off numbers from stack:
+          do {
+            // Popping off the first element in the stack and printing to user:
+            console.log(``);
+            console.log(`The popped number is ${stack.pop1()}`);
+            // Printing array list stack the user created:
+            console.log(``);
+            console.log(`The stack after popping off the current top integer: `);
+            console.log(stack.list());
+            //  Adding one to counter2 each time:
+            counter2 = counter2 + 1;
+          } while (counter2 != popNumber);
+        // Error catch null value passed:
+        } catch (e) {
+          console.log(`ERROR. Stack is empty!`);
+        }
+      }
+    }
+  }
+  // Error Catch Statement:
+} catch(err) {
+    console.log (`ERROR`);
+}
